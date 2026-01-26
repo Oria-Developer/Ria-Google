@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Portal</title>
+    <style>
+        /* Reset margins and ensure the body fills the whole screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* The iframe is locked to the full size of the window */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This is the only element on the page -->
+    <iframe id="viewer-frame" src="about:blank" allowfullscreen></iframe>
+
+    <script>
+        /**
+         * SET YOUR LINK HERE
+         * This is the only place the URL is defined. 
+         * The user cannot change this through the browser UI.
+         */
+        const targetUrl = "https://script.google.com/macros/s/AKfycbx0RiTW_uemVx6PJeeTSx0QzfkGWvDgf19MmWrk0jwZFFGk5ZoDNrHvYGSeYtqwdphb/exec"; 
+
+        window.onload = () => {
+            const frame = document.getElementById('viewer-frame');
+            
+            // Ensure the URL has a proper protocol
+            let finalUrl = targetUrl.trim();
+            if (!finalUrl.startsWith('http://') && !finalUrl.startsWith('https://')) {
+                finalUrl = 'https://' + finalUrl;
+            }
+
+            // Load the site immediately
+            frame.src = finalUrl;
+        };
+    </script>
+</body>
+</html>
